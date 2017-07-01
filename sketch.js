@@ -5,6 +5,7 @@ var bird;
 var target;
 var maxObstacles = 15;
 var obstacles = [];
+var updateFromBeg = true;
 
 
 function setup() {
@@ -29,7 +30,7 @@ function setup() {
             }
         }
 
-        if (! doesOverlap) {
+        if (!doesOverlap) {
             obstacles.push(currObstacle);
         }
     }
@@ -37,7 +38,7 @@ function setup() {
 
 function resetSketch() {
     bird = new Bird(width / 2, height / 2, 35);
-    target = new Target(800, 0, 30);
+    target = new Target(770, 30, 30);
 }
 
 function draw() {

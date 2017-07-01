@@ -9,8 +9,8 @@ function Bird(x, y, size) {
     this.v = createVector();
     this.a = createVector();
 
-    this.maxSeekVelocity = 2;
-    this.maxSeekForce = 2;
+    this.maxSeekVelocity = 5;
+    this.maxSeekForce = 5;
 
     this.halfSize = size/2;
 

@@ -3,29 +3,40 @@
  */
 var bird;
 var target;
-var maxObstacles = 6;
+var maxObstacles = 15;
 var obstacles = [];
+
 
 function setup() {
     createCanvas(800, 600);
     resetSketch();
-    for (var i = 0; i < maxObstacles; i++) {
-        var obstacle = new Obstacle()
-    }
-    while (obstacles.length < 6) {
+
+    while (obstacles.length < maxObstacles) {
         var x = random(700) + 50;
         var y = random(500) + 50;
-        var size = random(25) + 5;
-        var hasTheSame = false;
+        var size = random(50) + 15;
+        var doesOverlap = false;
+
+        var currObstacle = new Obstacle(x, y, size);
+        if (currObstacle.doOverlap(bird.pos.x, bird.pos.y, bird.size).result) {
+            continue;
+        }
+
         for (var i = 0; i < obstacles.length; i++) {
-            var currObstacle = obstacles[i];
-            
+            if (obstacles[i].doOverlap(currObstacle.x, currObstacle.y, currObstacle.size).result) {
+                doesOverlap = true;
+                break;
+            }
+        }
+
+        if (! doesOverlap) {
+            obstacles.push(currObstacle);
         }
     }
 }
 
 function resetSketch() {
-    bird = new Bird(width / 2, height / 2, 30);
+    bird = new Bird(width / 2, height / 2, 35);
     target = new Target(800, 0, 30);
 }
 
@@ -41,6 +52,10 @@ function draw() {
 
     stroke(200);
     fill(200, 200, 200, 80);
+
+    obstacles.forEach(function (currentValue) {
+        currentValue.draw();
+    });
 
     bird.seek(createVector(target.x, target.y));
     bird.update();

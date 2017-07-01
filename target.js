@@ -14,7 +14,6 @@ function Target(x, y, diameter) {
     }
 
     this.show = function () {
-        stroke(255);
         fill(this.col);
         ellipse(this.x, this.y, this.diameter, this.diameter);
     }

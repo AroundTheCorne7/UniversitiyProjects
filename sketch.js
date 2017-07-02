@@ -61,7 +61,7 @@ function draw() {
     bird.seek(createVector(target.x, target.y));
     bird.update();
     bird.show();
-    target.update();
+    target.update(updateFromBeg);
     target.show();
 
 }

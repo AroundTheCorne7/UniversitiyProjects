@@ -36,7 +36,6 @@ function Bird(x, y, size) {
         seekForce.limit(this.maxSeekForce);
 
         var collideResult = this.isColliding();
-    debugger;
         if (collideResult.result) {
             var y = collideResult.orientation;
             var x = y*Math.PI/4;

@@ -23,31 +23,19 @@ function Target(x, y, diameter) {
     }
 
     this.update = function (update) {
-        if (!updateFromBeg) {
-            var maxTargetWidth = width - 30;
+        if (!update) {
             var maxTargetHeight = height - 30;
-            if (this.x < maxTargetWidth) {
-                this.x = this.x + this.speed;
-                if (this.x >= maxTargetWidth) {
-                    updateFromBeg = true;
-                }
-            } else if (this.y < maxTargetHeight) {
+            if (this.y < maxTargetHeight) {
                 this.y = this.y + this.speed;
                 if (this.y >= maxTargetHeight) {
                     updateFromBeg = true;
                 }
             }
         } else {
-            var minTargetWidth = 30;
             var minTargetHeight = 30;
-            if (this.x > minTargetWidth) {
-                this.x = this.x - this.speed;
-                if (this.x <= minTargetWidth) {
-                    updateFromBeg = false;
-                }
-            } else if (this.y > minTargetHeight) {
+            if (this.y >=minTargetHeight) {
                 this.y = this.y - this.speed;
-                if (this.y <= minTargetHeight) {
+                if (this.y < minTargetHeight) {
                     updateFromBeg = false;
                 }
             }

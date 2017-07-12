@@ -9,8 +9,8 @@ function Bird(x, y, size) {
     this.v = createVector();
     this.a = createVector();
 
-    this.maxSeekVelocity = 5;
-    this.maxSeekForce = 5;
+    this.maxSeekVelocity = 3;
+    this.maxSeekForce = 2;
 
     this.halfSize = size/2;
 
@@ -26,6 +26,16 @@ function Bird(x, y, size) {
     this.applyForce = function (force) {
         this.a.add(force);
     };
+
+    this.traditionalSeek = function(target, weight) {
+      var desire = p5.Vector.sub(target, this.pos);
+      desire.limit(this.maxSeekVelocity);
+
+      var seekForce = p5.Vector.sub(desire, this.v);
+      seekForce.mult(weight);
+      seekForce.limit(this.maxSeekForce);
+      this.applyForce(seekForce);
+    }
 
     this.seek = function (target) {
 
@@ -48,6 +58,8 @@ function Bird(x, y, size) {
 
     this.update = function () {
         this.v.add(this.a);
+
+        this.v.limit(this.maxSeekVelocity);
         this.pos.add(this.v);
 
         this.a.mult(0);
